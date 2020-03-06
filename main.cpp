@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <gl/gl.h>
+#include "engine/Node.cpp"
 
 LRESULT CALLBACK WndProc (HWND hWnd, UINT message,
 WPARAM wParam, LPARAM lParam);
