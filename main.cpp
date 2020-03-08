@@ -29,11 +29,11 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
     wc.hCursor = LoadCursor (NULL, IDC_ARROW);
     wc.hbrBackground = (HBRUSH) GetStockObject (BLACK_BRUSH);
     wc.lpszMenuName = NULL;
-    wc.lpszClassName = "GLSample";
+    wc.lpszClassName = "Bismuth";
     RegisterClass (&wc);
 
     hWnd = CreateWindow (
-      "GLSample", "bismuth", 
+      "Bismuth", "Bismuth Engine", 
       WS_CAPTION | WS_POPUPWINDOW | WS_VISIBLE,
       0, 0, 256, 256,
       NULL, NULL, hInstance, NULL);
