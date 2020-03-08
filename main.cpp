@@ -1,6 +1,10 @@
 #include <windows.h>
 #include <gl/gl.h>
-#include "engine/Node.cpp"
+#include "engine/bismuth.cpp"
+
+using namespace bismuth;
+
+BaseNode *bNode = new BaseNode("scene1.bnt"); //.bnt is a bismuth node tree file
 
 LRESULT CALLBACK WndProc (HWND hWnd, UINT message,
 WPARAM wParam, LPARAM lParam);
@@ -11,7 +15,7 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
     WNDCLASS wc;
     HWND hWnd;
     HDC hDC;
-    HGLRC hRC;        
+    HGLRC hRC;
     MSG msg;
     BOOL bQuit = FALSE;
     float theta = 0.0f;
@@ -29,13 +33,15 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
     RegisterClass (&wc);
 
     hWnd = CreateWindow (
-      "GLSample", "OpenGL Sample", 
+      "GLSample", "bismuth", 
       WS_CAPTION | WS_POPUPWINDOW | WS_VISIBLE,
       0, 0, 256, 256,
       NULL, NULL, hInstance, NULL);
 
     EnableOpenGL (hWnd, &hDC, &hRC);
-
+	
+	bNode->triggerCreate();
+	
     while (!bQuit) {
         if (PeekMessage (&msg, NULL, 0, 0, PM_REMOVE)) {
             if (msg.message == WM_QUIT) {
@@ -48,14 +54,7 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             glClearColor (0.0f, 0.0f, 0.0f, 0.0f);
             glClear (GL_COLOR_BUFFER_BIT);
 
-			glPushMatrix ();
-            glRotatef (theta, 0.0f, 0.0f, 1.0f);
-            glBegin (GL_TRIANGLES);
-            glColor3f (1.0f, 0.0f, 0.0f);   glVertex2f (0.0f, 1.0f);
-            glColor3f (0.0f, 1.0f, 0.0f);   glVertex2f (0.87f, -0.5f);
-            glColor3f (0.0f, 0.0f, 1.0f);   glVertex2f (-0.87f, -0.5f);
-            glEnd ();
-            glPopMatrix ();
+			bNode->triggerUpdate();
 
             SwapBuffers (hDC);
 
@@ -63,6 +62,10 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             Sleep (1);
         }
     }
+
+	bNode->triggerDestroy();
+	
+	delete bNode;
 
     DisableOpenGL (hWnd, hDC, hRC);
 
