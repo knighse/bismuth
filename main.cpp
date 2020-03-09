@@ -1,10 +1,5 @@
 #include <windows.h>
 #include <gl/gl.h>
-#include "engine/bismuth.cpp"
-
-using namespace bismuth;
-
-BaseNode *bNode = new BaseNode("scene1.bnt"); //.bnt is a bismuth node tree file
 
 LRESULT CALLBACK WndProc (HWND hWnd, UINT message,
 WPARAM wParam, LPARAM lParam);
@@ -40,8 +35,6 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
     EnableOpenGL (hWnd, &hDC, &hRC);
 	
-	bNode->triggerCreate();
-	
     while (!bQuit) {
         if (PeekMessage (&msg, NULL, 0, 0, PM_REMOVE)) {
             if (msg.message == WM_QUIT) {
@@ -54,18 +47,12 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             glClearColor (0.0f, 0.0f, 0.0f, 0.0f);
             glClear (GL_COLOR_BUFFER_BIT);
 
-			bNode->triggerUpdate();
-
             SwapBuffers (hDC);
 
             theta += 1.0f;
             Sleep (1);
         }
     }
-
-	bNode->triggerDestroy();
-	
-	delete bNode;
 
     DisableOpenGL (hWnd, hDC, hRC);
 

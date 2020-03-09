@@ -1,8 +1,20 @@
 #ifndef BISMUTH
 #define BISMUTH
 
-#include "Event.cpp"
-#include "Node.cpp"
-#include "BaseNode.cpp"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+#include <string>
+#include <fstream>
+using std::string;
+
+namespace bismuth {
+	bLoad(string filename) {
+		
+	}
+	
+	bLoop() {
+		
+	}
+}
 
 #endif
