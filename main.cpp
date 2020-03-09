@@ -1,8 +1,10 @@
 #include <windows.h>
 #include <gl/gl.h>
+#include "engine/bismuth.cpp"
 
-LRESULT CALLBACK WndProc (HWND hWnd, UINT message,
-WPARAM wParam, LPARAM lParam);
+using namespace bismuth;
+
+LRESULT CALLBACK WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 void EnableOpenGL (HWND hWnd, HDC *hDC, HGLRC *hRC);
 void DisableOpenGL (HWND hWnd, HDC hDC, HGLRC hRC);
 
@@ -77,8 +79,15 @@ LRESULT CALLBACK WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		        case VK_ESCAPE:
 		            PostQuitMessage(0);
 		            return 0;
+		            break;
 	        }
 	        return 0;
+	    case WM_KEYUP:
+	    	switch (wParam) {
+	    		case :
+	    			
+	    			break;
+			}
 	
 	    default:
 	        return DefWindowProc (hWnd, message, wParam, lParam);
